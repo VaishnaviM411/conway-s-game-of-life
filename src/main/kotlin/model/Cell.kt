@@ -1,6 +1,6 @@
 package model
 
-class Cell(private var lifeStatus: LifeStatus = LifeStatus.DEAD) {
+class Cell(private var lifeStatus: LifeStatus = LifeStatus.DEAD, private val position: Position) {
 
     fun getLifeStatus() = lifeStatus
 

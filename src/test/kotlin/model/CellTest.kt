@@ -7,7 +7,8 @@ class CellTest {
 
     @Test
     fun `Should return LIVE when lifeStatus is LIVE`() {
-        val cell = Cell(LifeStatus.LIVE)
+        val position = Position(0,0)
+        val cell = Cell(LifeStatus.LIVE, position)
 
         val response = cell.getLifeStatus()
 
@@ -16,7 +17,8 @@ class CellTest {
 
     @Test
     fun `Should return DEAD when lifeStatus is DEAD`() {
-        val cell = Cell(LifeStatus.DEAD)
+        val position = Position(0,0)
+        val cell = Cell(LifeStatus.DEAD, position)
 
         val response = cell.getLifeStatus()
 
@@ -25,8 +27,9 @@ class CellTest {
 
     @Test
     fun `Should change the lifeStatus to DEAD when cell has more than 3 live neighbours`() {
-        val cell = Cell(LifeStatus.LIVE)
-        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val position = Position(0,0)
+        val cell = Cell(LifeStatus.LIVE, position)
+        val liveNeighbour = Cell(LifeStatus.LIVE, position)
         val neighbours = listOf(liveNeighbour, liveNeighbour, liveNeighbour, liveNeighbour)
 
         val updatedLifeStatus = cell.updateLifeStatus(neighbours)
@@ -36,8 +39,9 @@ class CellTest {
 
     @Test
     fun `Should change the lifeStatus to DEAD when cell has less than 2 live neighbours`() {
-        val cell = Cell(LifeStatus.LIVE)
-        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val position = Position(0,0)
+        val cell = Cell(LifeStatus.LIVE, position)
+        val liveNeighbour = Cell(LifeStatus.LIVE, position)
         val neighbours = listOf(liveNeighbour)
 
         val updatedLifeStatus = cell.updateLifeStatus(neighbours)
@@ -47,8 +51,9 @@ class CellTest {
 
     @Test
     fun `Should change the lifeStatus to LIVE when cell has 2 live neighbours`() {
-        val cell = Cell(LifeStatus.LIVE)
-        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val position = Position(0,0)
+        val cell = Cell(LifeStatus.LIVE, position)
+        val liveNeighbour = Cell(LifeStatus.LIVE, position)
         val neighbours = listOf(liveNeighbour, liveNeighbour)
 
         val updatedLifeStatus = cell.updateLifeStatus(neighbours)
@@ -58,8 +63,9 @@ class CellTest {
 
     @Test
     fun `Should change the lifeStatus to LIVE when cell has 3 live neighbours`() {
-        val cell = Cell(LifeStatus.LIVE)
-        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val position = Position(0,0)
+        val cell = Cell(LifeStatus.LIVE, position)
+        val liveNeighbour = Cell(LifeStatus.LIVE, position)
         val neighbours = listOf(liveNeighbour, liveNeighbour, liveNeighbour)
 
         val updatedLifeStatus = cell.updateLifeStatus(neighbours)
@@ -69,8 +75,9 @@ class CellTest {
 
     @Test
     fun `Should change the lifeStatus of dead cell to LIVE when cell has 3 live neighbours`() {
-        val cell = Cell()
-        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val position = Position(0,0)
+        val cell = Cell(position = position)
+        val liveNeighbour = Cell(LifeStatus.LIVE, position)
         val neighbours = listOf(liveNeighbour, liveNeighbour, liveNeighbour)
 
         val updatedLifeStatus = cell.updateLifeStatus(neighbours)

@@ -8,7 +8,8 @@ class GridTest {
     @Test
     fun `should create a Grid with given dimension`() {
         val numberOfCells = 100
-        val cells = List(numberOfCells) { List(numberOfCells) { Cell() } }
+        val position = Position(0,0)
+        val cells = List(numberOfCells) { List(numberOfCells) { Cell(position = position) } }
 
         val grid = Grid(cells)
 
@@ -18,12 +19,14 @@ class GridTest {
     @Test
     fun `should return true if position of cell is inside the grid`() {
         val numberOfCells = 100
-        val cells = List(numberOfCells) { List(numberOfCells) { Cell() } }
-        val grid = Grid(cells)
         val rowNumber = 3
         val columnNumber = 3
+        val position = Position(rowNumber,columnNumber)
+        val cells = List(numberOfCells) { List(numberOfCells) { Cell(position = position) } }
+        val grid = Grid(cells)
 
-        val response = grid.isCellPositionValid(rowNumber, columnNumber)
+
+        val response = grid.isCellPositionValid(position)
 
         assertTrue(response)
     }
@@ -31,12 +34,13 @@ class GridTest {
     @Test
     fun `should return false if position of cell is outside the grid`() {
         val numberOfCells = 100
-        val cells = List(numberOfCells) { List(numberOfCells) { Cell() } }
-        val grid = Grid(cells)
         val rowNumber = -3
         val columnNumber = 100
+        val position = Position(rowNumber,columnNumber)
+        val cells = List(numberOfCells) { List(numberOfCells) { Cell(position = position) } }
+        val grid = Grid(cells)
 
-        val response = grid.isCellPositionValid(rowNumber, columnNumber)
+        val response = grid.isCellPositionValid(position)
 
         assertFalse(response)
     }
@@ -44,10 +48,11 @@ class GridTest {
     @Test
     fun `should return cell at given position`() {
         val numberOfCells = 100
-        val cells = List(numberOfCells) { List(numberOfCells) { Cell() } }
+        val position = Position(0,0)
+        val cells = List(numberOfCells) { List(numberOfCells) { Cell(position = position) } }
         val grid = Grid(cells)
 
-        val cell = grid.getCell(0, 0)
+        val cell = grid.getCell(position)
 
         assertEquals(cells[0][0], cell)
     }
@@ -55,10 +60,10 @@ class GridTest {
     @Test
     fun `should throw exception if cell is outside grid`() {
         val numberOfCells = 100
-        val cells = List(numberOfCells) { List(numberOfCells) { Cell() } }
+        val position = Position(-2,100)
+        val cells = List(numberOfCells) { List(numberOfCells) { Cell(position = position) } }
         val grid = Grid(cells)
 
-        assertThrows(Exception()::class.java) { grid.getCell(-1, -1) }
+        assertThrows(Exception()::class.java) { grid.getCell(position) }
     }
-
 }
