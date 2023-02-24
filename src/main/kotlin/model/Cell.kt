@@ -3,6 +3,8 @@ package model
 class Cell(private var lifeStatus: LifeStatus = LifeStatus.DEAD) {
 
     fun getLifeStatus() = lifeStatus
+
+
     fun updateLifeStatus(neighbours: List<Cell>): LifeStatus {
         var numberOfLiveNeighbours = 0
         neighbours.forEach {
