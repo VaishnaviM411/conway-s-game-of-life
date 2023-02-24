@@ -25,9 +25,9 @@ class CellTest {
 
     @Test
     fun `Should change the lifeStatus to DEAD when cell has more than 3 live neighbours`() {
-        val cell = Cell()
+        val cell = Cell(LifeStatus.LIVE)
         val liveNeighbour = Cell(LifeStatus.LIVE)
-        val neighbours = listOf(liveNeighbour, liveNeighbour, liveNeighbour)
+        val neighbours = listOf(liveNeighbour, liveNeighbour, liveNeighbour, liveNeighbour)
 
         val updatedLifeStatus = cell.updateLifeStatus(neighbours)
 
@@ -36,9 +36,42 @@ class CellTest {
 
     @Test
     fun `Should change the lifeStatus to DEAD when cell has less than 2 live neighbours`() {
-        val cell = Cell()
+        val cell = Cell(LifeStatus.LIVE)
         val liveNeighbour = Cell(LifeStatus.LIVE)
         val neighbours = listOf(liveNeighbour)
+
+        val updatedLifeStatus = cell.updateLifeStatus(neighbours)
+
+        assertEquals(LifeStatus.LIVE, updatedLifeStatus)
+    }
+
+    @Test
+    fun `Should change the lifeStatus to LIVE when cell has 2 live neighbours`() {
+        val cell = Cell(LifeStatus.LIVE)
+        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val neighbours = listOf(liveNeighbour, liveNeighbour)
+
+        val updatedLifeStatus = cell.updateLifeStatus(neighbours)
+
+        assertEquals(LifeStatus.LIVE, updatedLifeStatus)
+    }
+
+    @Test
+    fun `Should change the lifeStatus to LIVE when cell has 3 live neighbours`() {
+        val cell = Cell(LifeStatus.LIVE)
+        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val neighbours = listOf(liveNeighbour, liveNeighbour, liveNeighbour)
+
+        val updatedLifeStatus = cell.updateLifeStatus(neighbours)
+
+        assertEquals(LifeStatus.LIVE, updatedLifeStatus)
+    }
+
+    @Test
+    fun `Should change the lifeStatus of dead cell to LIVE when cell has 3 live neighbours`() {
+        val cell = Cell()
+        val liveNeighbour = Cell(LifeStatus.LIVE)
+        val neighbours = listOf(liveNeighbour, liveNeighbour, liveNeighbour)
 
         val updatedLifeStatus = cell.updateLifeStatus(neighbours)
 
